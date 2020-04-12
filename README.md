@@ -1,57 +1,32 @@
-# Pokémon API
-### Out: 02/28/20 | Due: 03/13/20 11:59 PM (Deadline 03/14/20 11:59 PM for 10% reduction)
+ Pokémon API
 
 ## Overview
 
-You have a large `.json` file available to you called `poke.json` that contains information about 150 Pokemon.
+I have a large `.json` file available called `poke.json` that contains information about 150 Pokemon.
 
-In this project, you will create:
+In this project, I created:
 
 1. A website that allows to you visually explore Pokemon
 2. An API that will allow you to query different Pokemon.
 
 ## Objectives
 
-This project will give you practice with using Express.js, and how to use it to create both a website and API. You will also practice JSON parsing.
-
-## Grading
-
-The project will be graded as follows:
-
-- Public Tests: 60 points
-- Manual Tests: 20 points
-
-The **API portion** will be tested using public Mocha tests.
-The **Website portion** will be tested manually after submission to the submit server by the TAs.
+Practiced Express.js and JSON parsing, and how to use it to create both a website and API. 
 
 ## Setup
 
-Clone this project folder and run `npm install` inside the directory.
-
-You have the following files available to you:
-- `index.js`: this is where all your code will be. We have provided a skeleton of a working server that has Express required and initialized, middleware initialized, and the server listening on port `3000`. We have also defined all the routes. **This is the only file you should edit, and where all your code must be.**
-- `poke.json`: this is a `json` file containing all of the Pokemon data you will need.
-- `poke-data-util.js`: these are three utility functions available for you. Read them carefully to understand what they are doing.
-
-READ: `underscore_guide.md` This is an _excellent_ library that makes working with complex (or even simple) objects and arrays a lot easier. Read the guide and use it in your project if you'd like! (This is not a requirement. Normal for loops and for-each loops will be fine).
-
-**Do not use any other NPM modules other than the ones already in `package.json` to complete this project**
+READ: `underscore_guide.md` This is an _excellent_ library that makes working with complex (or even simple) objects and arrays a lot easier.
 
 ## Specifications
+API 
 
-This project has two sections:
-1. API
-2. Website
-
-**API (Total: 60 points in tests)**
-
-You will need to implement the following routes. All API routes are under `/api`
+I implemented the following routes. All API routes are under `/api`
 
 1.  `GET` `/api/id/:pokemon_id`
 
-  Return the entire data entry associated with the given pokemon_id.
+  Returns the entire data entry associated with the given pokemon_id.
 
-  If the Pokemon ID does not exist, return an empty object.
+  If the Pokemon ID does not exist, returns an empty object.
 
   ----
 
@@ -99,13 +74,13 @@ You will need to implement the following routes. All API routes are under `/api`
 
 2. `GET` `/api/evochain/:pokemon_name`
 
-  Return an array of all the Pokemon in the given Pokemon's evolution chain in alphabetical. Include the given Pokemon in the array.
+  Returns an array of all the Pokemon in the given Pokemon's evolution chain in alphabetical. Includes the given Pokemon in the array.
 
-  If the Pokemon name does not exist, then return an empty array.
+  If the Pokemon name does not exist, then returns an empty array.
 
-  You can assume we will provide the correct capitalization of the Pokemon. (Ex: We will request `/evochain/Pikachu`, not `/evochain/pikachu`)
+  I assumed user will provide the correct capitalization of the Pokemon. (Ex: They will request `/evochain/Pikachu`, not `/evochain/pikachu`)
 
-  For those not familiar with Pokemon, Pokemon evolve into other Pokemon in its evochain. Think of it as a linked list. The evochain is stored in the JSON under `prev_evolution` and `next_evolution`.
+ Pokemon evolve into other Pokemon in its evochain. Think of it as a linked list. The evochain is stored in the JSON under `prev_evolution` and `next_evolution`.
 
   ----
 
@@ -132,11 +107,11 @@ You will need to implement the following routes. All API routes are under `/api`
 
 3. `GET` `/api/type/:type`
 
-  Return an array of all Pokemon of the given type in the order they appear in the data object.
+  Returns an array of all Pokemon of the given type in the order they appear in the data object.
 
-  If no Pokemon are of the given type, then return an empty array.
+  If no Pokemon are of the given type, then returns an empty array.
 
-  You can assume we will provide the correct capitalization of the type. (Ex: We will request `/type/Fire`, not `/type/fire`)
+  I assumed user will provide the correct capitalization of the type. (Ex: We will request `/type/Fire`, not `/type/fire`)
 
   ---
 
@@ -163,12 +138,12 @@ You will need to implement the following routes. All API routes are under `/api`
 
 4. `GET` `/api/type/:type/heaviest`
 
-  Return an object with the name and weight of the heaviest Pokemon of a given type.
+  Returns an object with the name and weight of the heaviest Pokemon of a given type.
 
   The weight of a Pokemon can be found under the attribute `weight`
   (Note: there are no ties, so they are not an issue)
 
-  If the given type does not exist, return an empty object.
+  If the given type does not exist, returns an empty object.
 
 
   ----
@@ -196,15 +171,14 @@ You will need to implement the following routes. All API routes are under `/api`
 5. `POST` `/api/weakness/:pokemon_name/add/:weakness_name`
 
   Adds the given weakness to the `weaknesses` array of a given pokemon.
-  If the weakness is already there, you should not add another instance of it.
 
-  You should update:
+  It updates:
   1. The `poke.json` file with the new weakness so changes are saved to disk (and persist even if the server is reloaded).
   2. The global `_DATA` object, so that subsequent requests will use the updated data.
 
-  Return an object with the name and updated Pokemon weakness array. **Weaknesses should be added to the end of the weaknesses array.**
+  Return an object with the name and updated Pokemon weakness array. 
 
-  If the Pokemon does not exist, return an empty object.
+  If the Pokemon does not exist, returns an empty object.
 
   ----
 
@@ -216,9 +190,6 @@ You will need to implement the following routes. All API routes are under `/api`
   ```js
   {"name":"Fearow","weaknesses":["Electric","Rock", "Fire"]}
   ```
-
-  **AND `poke.json` should be updated**
-
   Example Request: `POST` `/api/weakness/Timothy/add/Fire`
 
   ```js
@@ -230,13 +201,12 @@ You will need to implement the following routes. All API routes are under `/api`
   Removes the given weakness from the `weaknesses` array of a given pokemon.
   If the does not exist, keep the weaknesses array as it is.  
 
-  You should update:
+  It updates:
   1. The `poke.json` file with the weakness removed so changes are saved to disk (and persist even if the server is reloaded).
   2. The global `_DATA` object, so that subsequent requests will use the updated data.
 
-  Return an objecect with the name and updated Pokemon weakness array. Order **Order all all other weaknesses should be maintained.**
-
-  If the Pokemon does not exist, return an empty object.
+  Return an objecect with the name and updated Pokemon weakness array. 
+  If the Pokemon does not exist, returns an empty object.
 
   ----
 
@@ -249,8 +219,6 @@ You will need to implement the following routes. All API routes are under `/api`
   {"name":"Fearow","weaknesses":["Electric"]}
   ```
 
-  **AND `poke.json` should be updated**
-
   Example Request: `DELETE` `/api/weakness/Timothy/remove/Fire`
 
   ```js
@@ -258,11 +226,11 @@ You will need to implement the following routes. All API routes are under `/api`
   ```
 
 
-**Website (Total: 20 points)**
+**Website **
 
-1. `GET` `/` **5 points**
+1. `GET` `/`
 
-  Display an HTML homepage of all the pokemon in a table with two columns:
+  Displays an HTML homepage of all the pokemon in a table with two columns:
 
   1. Pokemon ID
   2. Link tag with Pokemon name that links to `/pokemon/:pokemon_id`
@@ -337,9 +305,9 @@ You will need to implement the following routes. All API routes are under `/api`
   ```
 
 
-3. `GET` `/pokemon/image/:pokemon_id` **5 points**
+3. `GET` `/pokemon/image/:pokemon_id` 
 
-  Display an HTML page with *just* an image of a given Pokemon ID:
+  Display an HTML page with just an image of a given Pokemon ID:
 
   If the Pokemon ID does not exist, return an "Error: Pokemon not found".
 
@@ -360,20 +328,6 @@ You will need to implement the following routes. All API routes are under `/api`
   </body>
   </html>
   ```
-
-## Testing
-
-Make sure to run `npm install mocha -g` on your machine if you have not done so already. To test your project, run `mocha test` while in the main project directory. If you only want to run public tests, run `mocha test/publicTests.js`.
-
-When testing with mocha, make sure before you run your tests that:
-1. You are not running your app
-2. You are not running any other application on `port 3000` (If you go to `localhost:3000` it should say "This site can’t be reached")
-
-## Submissions
-
-Please submit your `index.js` file **only** to the submit server.
-
-You cannot use any other npm packages, so do not include your `package.json`
 
 ## Credits
 
